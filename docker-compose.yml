@@ -1,0 +1,18 @@
+version: "3"
+services:
+  clickhouse-artsofte-test:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse-artsofte-test
+    ports:
+      - 28123:8123
+      - 29000:9000
+    networks:
+      - ch_network
+    volumes:
+        - ./init_clickhouse.sql:/docker-entrypoint-initdb.d/init_clickhouse.sql
+    # command: ./init_clickhouse.sql
+
+networks:
+  ch_network:
+    name: ch_network
+    driver: "bridge"
